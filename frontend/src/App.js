@@ -1,24 +1,29 @@
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { AppBar, Box, Button, IconButton, Toolbar } from "@mui/material";
+import { AppBar, Box, IconButton, Toolbar } from "@mui/material";
 import HomeIcon from '@mui/icons-material/Home';
 import { Music } from "./components/Music";
+import './App.css';
+import AlbumIcon from '@mui/icons-material/Album';
+import { AddMusic } from "./components/AddMusic";
 
 
 
-// We could use for example the app bar for main menu https://mui.com/components/app-bar/#main-content
 function NavigationBar() {
+
+  
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{ marginBottom: 10 }}>
+    <Box sx={{bgcolor:'common.black' , borderBottom:1, borderColor:'common.white', marginBottom: 1,  flexGrow: 1 }}>
+      <AppBar sx={{bgcolor:'common.black'}} position="static" >
         <Toolbar>
-        <Link to={"/"}>
+          <Link to={"/"}>
             <IconButton
               size="large"
               edge="start"
-              color="inherit"
+              
               aria-label="menu"
-              sx={{ mr: 2 }}
+              sx={{ mr: 4 , color:'common.white'}}
             >
               <HomeIcon />
             </IconButton>
@@ -30,9 +35,9 @@ function NavigationBar() {
               edge="start"
               color="inherit"
               aria-label="menu"
-              sx={{ mr: 2 }}
+              sx={{ mr: 4 , color:'common.white'}}
             >
-              <HomeIcon />
+              <AlbumIcon />
             </IconButton>
           </Link>
           {/*It's possible to use the classic react router link but it will have ugly colors*/}
@@ -42,7 +47,7 @@ function NavigationBar() {
           {/*  </Link>*/}
           {/*</Button>*/}
           {/*We can pass a component into a button so it behaves as link but doesn't color it*/}
-         
+
         </Toolbar>
       </AppBar>
     </Box>
@@ -50,7 +55,8 @@ function NavigationBar() {
 }
 
 function Home() {
-  return <div>Welcome to our site!</div>;
+  return <h1 id='h1Home'>Welcome to my site!</h1>
+
 }
 
 
@@ -58,13 +64,14 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <NavigationBar />
-      <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/music" element={<Music />} />
-            
-          </Routes>
-        </Router>
+        <NavigationBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/music" element={<Music />} />
+          <Route path="/AddMusic" element={<AddMusic />} />
+
+        </Routes>
+      </Router>
     </div>
   );
 }
