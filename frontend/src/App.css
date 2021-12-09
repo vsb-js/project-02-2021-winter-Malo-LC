@@ -4,7 +4,7 @@ h1{
   margin-bottom: 30px;
   color: #e4dfb4;
    font-family: 'Trocchi', serif;
-    font-size: 45px;
+    font-size: 70px;
      font-weight: normal;
       line-height: 48px;
        
@@ -23,12 +23,20 @@ text-align: center;
 }
 
 #pChoose{
+  font-family: 'Trocchi', serif;
   text-align: center;
-  color:white;
+  color: #e4dfb4;
+  font-size: 20px;
 }
 
 #flex{
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+#selectSyle{
+  color: #e4dfb4 ;
+  background-color: rgb(44, 44, 44);
+
 }

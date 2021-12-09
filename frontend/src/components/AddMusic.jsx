@@ -4,11 +4,11 @@ import axios from "axios";
 import { apiUrl } from "../config";
 
 export function AddMusic() {
-    const [data, setData] = useState(null);
-    const [AlbumName, setName] = useState(null);
-
+    const [ArtistNames, setArtist] = useState(null);
     const [CurrId, setId] = useState(1);
 
+
+    let j = 1;
     // There are more ways how we can handle forms with React
     // One of them is to handle it with single state and onChange
     // We want to have only 1 state for the form data! Multiple states can lead to problems
@@ -16,25 +16,28 @@ export function AddMusic() {
         name: "",
         album: "",
         runTime: "",
-        ArtistId: "",
+        ArtistId: 1,
     });
 
 
 
     useEffect(() => {
+
+        //Get all artists names
+
         try {
-          axios.get(`${apiUrl}/ArtistAndMusics/` + CurrId).then((response) => {
-            console.log(response.data);
-            setData(response.data);
-            response = response.data;
-            response = response.musics[0];
-            response = response.album
-            setName(response);
-          });
+            axios.get(`${apiUrl}/all`).then(async (response) => {
+                response = response.data;
+                response = response.artists;
+                console.log(response);
+                setArtist(response)
+
+
+            });
         } catch (error) {
-          console.log(error)
+            console.log(error)
         }
-      }, [CurrId]);
+    }, []);
 
 
 
@@ -56,19 +59,19 @@ export function AddMusic() {
         });
     }
 
-    function onBrandChange(e) {
+    function onAlbumChange(e) {
         setFormState((prevState) => {
-            return { ...prevState, ...{ brand: e.target.value } };
+            return { ...prevState, ...{ album: e.target.value } };
         });
     }
-    function onBrandChange(e) {
+    function onRunTimeChange(e) {
         setFormState((prevState) => {
-            return { ...prevState, ...{ brand: e.target.value } };
+            return { ...prevState, ...{ runTime: e.target.value } };
         });
     }
-    function onBrandChange(e) {
+    function onArtistIdChangeDropDown(e) {
         setFormState((prevState) => {
-            return { ...prevState, ...{ brand: e.target.value } };
+            return { ...prevState, ...{ ArtistId: e.target.value } };
         });
     }
 
@@ -78,9 +81,11 @@ export function AddMusic() {
         // We could include some form validation
 
         axios
-            .post(`${apiUrl}/cars/create`, {
+            .post(`${apiUrl}/musics/create`, {
                 name: formState.name,
-                brand: formState.brand
+                album: formState.album,
+                runTime: formState.runTime,
+                ArtistId: formState.ArtistId,
             })
             .then((response) => {
                 console.log(response.data);
@@ -89,7 +94,7 @@ export function AddMusic() {
                 // This is something we have specified which is returned
                 if (dataFromServer.success === "OK") {
                     // we want to inform the car that it was success
-                    setActionResult("Car successfully created");
+                    setActionResult("Music successfully created");
                 }
             })
             .catch((reason) => {
@@ -102,14 +107,36 @@ export function AddMusic() {
                 // Let's clear the form
                 setFormState({
                     name: "",
-                    brand: "",
+                    album: "",
+                    runTime: "",
+                    ArtistId: "",
                 }),
             );
+    }
+
+    if (!ArtistNames) {
+        return <div>Loading...</div>;
     }
 
     // Btw we should definitely better design our form with CSS, add margins and other things
     return (
         <div>
+            <p id="pChoose">
+                Choose an already existing Artist :
+                <select id="selectSyle" value={CurrId} onChange={(e) => {
+                    setId(e.target.value)
+                    onArtistIdChangeDropDown(e)
+                    console.log(CurrId)
+                }}>
+                    {
+                        ArtistNames.map((names) => {
+                            return <option value={j++}>{names.name}</option>
+                        })
+                    }
+
+
+                </select>
+            </p>
             <Box component="form" noValidate>
                 <div>
                     <TextField
@@ -117,16 +144,24 @@ export function AddMusic() {
                         id="Name"
                         label="Name"
                         defaultValue=""
-                        value={formState.firstName}
+                        value={formState.name}
                         onChange={onNameChange}
                     />
                     <TextField
                         required
-                        id="brand"
-                        label="Brand"
+                        id="Album"
+                        label="Album"
                         defaultValue=""
-                        value={formState.lastName}
-                        onChange={onBrandChange}
+                        value={formState.album}
+                        onChange={onAlbumChange}
+                    />
+                    <TextField
+                        required
+                        id="RunTime"
+                        label="RunTime"
+                        defaultValue=""
+                        value={formState.runTime}
+                        onChange={onRunTimeChange}
                     />
                 </div>
                 <Button variant="outlined" onClick={handleFormSubmit}>

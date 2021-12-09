@@ -14,7 +14,7 @@ import { apiUrl } from "../config";
 import AddIcon from '@mui/icons-material/Add';
 
 
-export function Music() {
+export function Artist() {
   const [data, setData] = useState(null);
   const [AlbumName, setName] = useState(null);
   const [CurrId, setId] = useState(1);

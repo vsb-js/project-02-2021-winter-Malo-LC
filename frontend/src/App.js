@@ -6,9 +6,8 @@ import { Music } from "./components/Music";
 import './App.css';
 import AlbumIcon from '@mui/icons-material/Album';
 import { AddMusic } from "./components/AddMusic";
-
-
-
+import { Artist } from "./components/Artist";
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
 function NavigationBar() {
 
   
@@ -40,13 +39,18 @@ function NavigationBar() {
               <AlbumIcon />
             </IconButton>
           </Link>
-          {/*It's possible to use the classic react router link but it will have ugly colors*/}
-          {/*<Button color="inherit">*/}
-          {/*  <Link to={"/users"}>*/}
-          {/*    Users*/}
-          {/*  </Link>*/}
-          {/*</Button>*/}
-          {/*We can pass a component into a button so it behaves as link but doesn't color it*/}
+          <Link to={"/artist"}>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 4 , color:'common.white'}}
+            >
+              <MusicNoteIcon />
+            </IconButton>
+          </Link>
+          
 
         </Toolbar>
       </AppBar>
@@ -69,6 +73,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/music" element={<Music />} />
           <Route path="/AddMusic" element={<AddMusic />} />
+          <Route path="/artist" element={<Artist />} />
 
         </Routes>
       </Router>
