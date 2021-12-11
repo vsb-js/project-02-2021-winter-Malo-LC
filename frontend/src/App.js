@@ -7,15 +7,15 @@ import './App.css';
 import AlbumIcon from '@mui/icons-material/Album';
 import { AddMusic } from "./components/AddMusic";
 import { Artist } from "./components/Artist";
-import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import MusicNoteIcon from '@mui/icons-material/BarChart';
+
+
+
 function NavigationBar() {
-
-  
-
   return (
     <Box sx={{bgcolor:'common.black' , borderBottom:1, borderColor:'common.white', marginBottom: 1,  flexGrow: 1 }}>
-      <AppBar sx={{bgcolor:'common.black'}} position="static" >
-        <Toolbar>
+      <AppBar sx={{ bgcolor:'common.black'}} position="static" >
+        <Toolbar sx={{justifyContent:'center'}}>
           <Link to={"/"}>
             <IconButton
               size="large"
