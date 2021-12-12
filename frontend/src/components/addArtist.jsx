@@ -3,20 +3,18 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { apiUrl } from "../config";
 
-export function AddMusic() {
+export function AddArtist() {
     const [ArtistNames, setArtist] = useState(null);
-    const [CurrId, setId] = useState(1);
+    
+    
 
-
-    let j = 1;
+  
     // There are more ways how we can handle forms with React
     // One of them is to handle it with single state and onChange
     // We want to have only 1 state for the form data! Multiple states can lead to problems
     const [formState, setFormState] = useState({
         name: "",
-        album: "",
-        runTime: 0,
-        ArtistId: 1,
+        followers: "",
     });
 
 
@@ -41,7 +39,7 @@ export function AddMusic() {
 
 
 
-    // we want to have some kind of action result when we hit the API
+    // we want to  have some kind of action result when we hit the API
     const [actionResult, setActionResult] = useState(null);
 
     function onNameChange(e) {
@@ -59,39 +57,25 @@ export function AddMusic() {
         });
     }
 
-    function onAlbumChange(e) {
+    function onFollowersChange(e) {
         setFormState((prevState) => {
-            return { ...prevState, ...{ album: e.target.value } };
+            return { ...prevState, ...{ followers: e.target.value*1 } };
         });
     }
-    function onRunTimeChange(e) {
-        setFormState((prevState) => {
-            return { ...prevState, ...{ runTime: e.target.value*1 } };
-        });
-    }
-    function onArtistIdChangeDropDown(e) {
-        setFormState((prevState) => {
-            return { ...prevState, ...{ ArtistId: e.target.value*1 } };
-        });
-    }
+    
 
     function handleFormSubmit() {
         console.log(formState);
-        if(true){
-            console.log(typeof(formState.runTime) )
-        }
 
 
 
 
         // We could include some form validation
-        if(formState.name!=="" && formState.album!=="" && Number.isInteger(formState.runTime)){
+        if(formState.name!=="" && Number.isInteger(formState.followers)){
             axios
-            .post(`${apiUrl}/musics/create`, {
+            .post(`${apiUrl}/artists/create`, {
                 name: formState.name,
-                album: formState.album,
-                runTime: formState.runTime,
-                ArtistId: formState.ArtistId,
+                followers: formState.followers
             })
             .then((response) => {
                 console.log(response.data);
@@ -105,7 +89,7 @@ export function AddMusic() {
             })
             .catch((reason) => {
                 console.error(reason);
-                setActionResult("There was an error creating the Music");
+                setActionResult("There was an error creating the Artist");
             })
             .finally(
                 // Finally is action which will happen regardless if it goes to "then" or "catch"
@@ -113,14 +97,12 @@ export function AddMusic() {
                 // Let's clear the form
                 setFormState({
                     name: "",
-                    album: "",
-                    runTime: "",
-                    ArtistId: "",
+                    followers: "",
                 }),
             );
         }
         else{
-            setActionResult("There was an error creating the Music");
+            setActionResult("There was an error creating the Artist");
         }
         
     }
@@ -132,22 +114,7 @@ export function AddMusic() {
     // Btw we should definitely better design our form with CSS, add margins and other things
     return (
         <div >
-            <p id="pChoose">
-                Choose an already existing Artist :
-                <select id="selectSyle" value={CurrId} onChange={(e) => {
-                    setId(e.target.value)
-                    onArtistIdChangeDropDown(e)
-                    console.log(formState)
-                }}>
-                    {
-                        ArtistNames.map((names) => {
-                            return <option key={names.id} value={j++}>{names.name}</option>
-                        })
-                    }
-
-
-                </select>
-            </p>
+            <h1 className="centered">Add an Artist into the database</h1>
             <Box className="center" component="form" noValidate>
                 <div className="field">
                     <TextField
@@ -162,20 +129,11 @@ export function AddMusic() {
                     <TextField
                         sx={{ input: { color: 'white' } }}
                         required
-                        id="Album"
-                        label="Album"
-
-                        value={formState.album}
-                        onChange={onAlbumChange}
-                    />
-                    <TextField
-                        sx={{ input: { color: 'white' } }}
-                        required
-                        id="RunTime"
-                        label="RunTime"
+                        id="Followers"
+                        label="Followers"
                         type="number"
-                        value={formState.runTime}
-                        onChange={onRunTimeChange}
+                        value={formState.album}
+                        onChange={onFollowersChange}
                     />
                 </div>
                 <Button variant="outlined" onClick={handleFormSubmit}>

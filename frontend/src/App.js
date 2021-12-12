@@ -7,7 +7,9 @@ import './App.css';
 import AlbumIcon from '@mui/icons-material/Album';
 import { AddMusic } from "./components/AddMusic";
 import { Artist } from "./components/Artist";
+import { AddArtist } from "./components/addArtist";
 import MusicNoteIcon from '@mui/icons-material/BarChart';
+import AddIcon from '@mui/icons-material/Add';
 
 
 
@@ -39,6 +41,17 @@ function NavigationBar() {
               <AlbumIcon />
             </IconButton>
           </Link>
+          <Link to={"/addArtist"}>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 4 , color:'common.white'}}
+            >
+              <AddIcon />
+            </IconButton>
+          </Link>
           <Link to={"/artist"}>
             <IconButton
               size="large"
@@ -50,6 +63,7 @@ function NavigationBar() {
               <MusicNoteIcon />
             </IconButton>
           </Link>
+         
           
 
         </Toolbar>
@@ -74,7 +88,7 @@ function App() {
           <Route path="/music" element={<Music />} />
           <Route path="/AddMusic" element={<AddMusic />} />
           <Route path="/artist" element={<Artist />} />
-
+          <Route path="/addArtist" element={<AddArtist />} />
         </Routes>
       </Router>
     </div>

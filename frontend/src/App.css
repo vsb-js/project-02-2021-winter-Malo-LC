@@ -101,3 +101,21 @@ text-align: center;
   scrollbar-color: rgb(228, 223, 180) none;
 }
 
+.centered{
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin: 50px 0;
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.Confirmation	{
+  color: white;
+  
+}
+

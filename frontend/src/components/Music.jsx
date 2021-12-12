@@ -22,11 +22,11 @@ export function Music() {
 
   let j = 1;
   let i = 1;
-  let temp = [];
+  
   useEffect(() => {
 
     //Get all musics + album name
-
+    let temp = [];
     try {
       axios.get(`${apiUrl}/ArtistAndMusics/` + CurrId).then((response) => {
         console.log(response.data);
@@ -86,7 +86,6 @@ export function Music() {
   }
   console.log(AlbumName)
 
-  // using simple table https://mui.com/components/tables/
   return (
     <div>
       <div id="flex">
@@ -98,7 +97,7 @@ export function Music() {
           }}>
             {
               ArtistNames.map((names) => {
-                return <option value={j++}>{names.name}</option>
+                return <option key={names.id} value={j++}>{names.name}</option>
               })
             }
 
@@ -125,7 +124,7 @@ export function Music() {
         <Grid item sx={{ width: 900 }}>
           
           {data.artist.map((row) => (
-            <h1>{row.name}</h1>
+            <h1 key={row.id}>{row.name}</h1>
           ))}
           <TableContainer style={{ maxWidth: 800 }}>
             <Table >

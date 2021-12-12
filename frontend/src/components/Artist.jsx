@@ -24,7 +24,7 @@ export function Artist() {
         let sum = 0;
         for (let i = 0; i < response.length; i++) {
           sum += response[i].runTime;
-          console.log(sum)
+          
         }
 
         setTotalRuntime(sum);
