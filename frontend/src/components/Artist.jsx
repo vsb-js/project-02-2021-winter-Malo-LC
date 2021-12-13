@@ -10,7 +10,7 @@ export function Artist() {
   const [ArtistNames, setArtist] = useState(null);
   const [SongNames, setSong] = useState(null);
   const [AlbumNames, setAlbumNames] = useState([]);
-
+  let j =0;
   useEffect(() => {
 
     //Get all album name + ArtistId
@@ -89,28 +89,28 @@ export function Artist() {
 
   // using simple table https://mui.com/components/tables/
   return (
-    <div class="cards">
-      <div class="card">
+    <div className="cards">
+      <div className="card">
         <h3>Number of artists : {ArtistNames.length}</h3>
-        <div class="content">{ArtistNames.map((Arnames) => {
+        <div className="content">{ArtistNames.map((Arnames) => {
           return <p key={Arnames.id}>{Arnames.name}</p>
         })}</div>
       </div>
-      <div class="card">
+      <div className="card">
         <h3>Number of Albums : {AlbumNames.length}</h3>
-        <div class="content">{AlbumNames.map((Abnames) => {
-          return <p key={Abnames.id}>{Abnames}</p>
+        <div className="content">{AlbumNames.map((Abnames) => {
+          return <p key={j++}>{Abnames}</p>
 
         })}</div>
       </div>
-      <div class="card">
+      <div className="card">
         <h3>Number of Songs : {SongNames.length}</h3>
-        <div class="content" >{SongNames.map((Sonames) => {
+        <div className="content" >{SongNames.map((Sonames) => {
           return <p key={Sonames.id}>{Sonames.name}</p>
 
         })}</div>
       </div>
-      <div class="card">
+      <div className="card">
         <h3>Total run Time : {secondsToMinutes(TotalRuntime)} minutes</h3>
         <AccessTimeFilledIcon
         sx={{marginLeft:'40%'}}

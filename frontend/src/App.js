@@ -10,6 +10,12 @@ import { Artist } from "./components/Artist";
 import { AddArtist } from "./components/addArtist";
 import MusicNoteIcon from '@mui/icons-material/BarChart';
 import AddIcon from '@mui/icons-material/Add';
+import { UpdateMusic } from "./components/UpdateMusic";
+import { DeleteMusic } from "./components/DeleteMusic";
+import UpgradeIcon from '@mui/icons-material/Upgrade';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
+
 
 
 
@@ -63,6 +69,28 @@ function NavigationBar() {
               <MusicNoteIcon />
             </IconButton>
           </Link>
+          <Link to={"/UpdateMusic"}>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 4 , color:'common.white'}}
+            >
+              <UpgradeIcon />
+            </IconButton>
+          </Link>
+          <Link to={"/DeleteMusic"}>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 4 , color:'common.white'}}
+            >
+              <DeleteForeverIcon />
+            </IconButton>
+          </Link>
          
           
 
@@ -89,6 +117,8 @@ function App() {
           <Route path="/AddMusic" element={<AddMusic />} />
           <Route path="/artist" element={<Artist />} />
           <Route path="/addArtist" element={<AddArtist />} />
+          <Route path="/UpdateMusic" element={<UpdateMusic />} />
+          <Route path="/DeleteMusic" element={<DeleteMusic />} />
         </Routes>
       </Router>
     </div>
