@@ -6,9 +6,6 @@ import { apiUrl } from "../config";
 export function DeleteMusic() {
     const [songNames, setSongs] = useState(null);
     const [CurrId, setCurrid] = useState(null);
-    
-
-
 
     useEffect(() => {
 
@@ -28,27 +25,15 @@ export function DeleteMusic() {
         }
     }, []);
 
-
-
-    // we want to have some kind of action result when we hit the API
     const [actionResult, setActionResult] = useState(null);
 
-
-
     function onDropDownChange(e) {
-        setCurrid(e.target.value*1)
-
+        setCurrid(e.target.value * 1)
     }
-
 
     function handleFormSubmit() {
         console.log(songNames[CurrId]);
 
-
-
-
-
-        // We could include some form validation
         if (Number.isInteger(CurrId)) {
             axios
                 .delete(`${apiUrl}/delete/musics/` + CurrId)
@@ -72,12 +57,12 @@ export function DeleteMusic() {
 
     return (
         <div >
+            <h1 className="centered">Delete a Music from the database</h1>
+
             <p id="pChoose">
                 Choose an already existing Song :
                 <select id="selectSyle" onChange={(e) => {
                     onDropDownChange(e)
-
-                    
                     console.log(CurrId)
                 }}>
                     {
@@ -85,12 +70,9 @@ export function DeleteMusic() {
                             return <option key={names.id} value={names.id}>{names.name}</option>
                         })
                     }
-
-
                 </select>
             </p>
             <Box className="center" component="form" noValidate>
-
                 <Button variant="outlined" onClick={handleFormSubmit}>
                     Delete
                 </Button>

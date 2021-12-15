@@ -22,7 +22,7 @@ export function Music() {
 
   let j = 1;
   let i = 1;
-  
+
   useEffect(() => {
 
     //Get all musics + album name
@@ -34,11 +34,11 @@ export function Music() {
         response = response.data;
         response = response.musics;
         for (let k = 0; k < response.length; k++) {
-          temp[k] = response[k].album;
+          temp[k] = response[k].album;              //get all albums
         }
         let uniqueAlbums = [];
         temp.forEach((c) => {
-          if (!uniqueAlbums.includes(c)) {
+          if (!uniqueAlbums.includes(c)) { // and delete duplicates
             uniqueAlbums.push(c);
           }
         });
@@ -78,9 +78,6 @@ export function Music() {
     return minutes + " : " + seconds;
 
   }
-  // The loading is extremely important even though it can be extremely fast!
-  // Because we don't have any interaction on this view ( the data doesn't change)
-  // we don't need additional state for loading. But in other cases we might need state with loading
   if (!data || !ArtistNames) {
     return <div>Loading...</div>;
   }
@@ -100,29 +97,21 @@ export function Music() {
                 return <option key={names.id} value={j++}>{names.name}</option>
               })
             }
-
-
           </select>
         </p>
-
         <Link to={"/AddMusic"}>
           <IconButton
             size="large"
             edge="start"
-
             aria-label="add"
             sx={{ mr: 4, color: 'common.white' }}
           >
-
             <AddIcon />
           </IconButton>
         </Link>
-
       </div>
-
       <Grid sx={{ display: 'flex', justifyContent: 'center' }} >
         <Grid item sx={{ width: 900 }}>
-          
           {data.artist.map((row) => (
             <h1 key={row.id}>{row.name}</h1>
           ))}
@@ -134,7 +123,7 @@ export function Music() {
                   <TableCell sx={{ color: 'common.white' }}></TableCell>
                   <TableCell sx={{ color: 'common.white' }}>Title</TableCell>
                   <TableCell sx={{ color: 'common.white' }}>Length</TableCell>
-                  <TableCell sx={{textAlign:"center", color: 'common.white' }}>Album</TableCell>
+                  <TableCell sx={{ textAlign: "center", color: 'common.white' }}>Album</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -147,7 +136,7 @@ export function Music() {
                     </TableCell>
                     <TableCell sx={{ color: 'common.white' }}>{row.name}</TableCell>
                     <TableCell sx={{ color: 'common.white' }}>{secondsToMinutes(row.runTime)}</TableCell>
-                    <TableCell sx={{ textAlign:"center", color: 'common.white' }}>{row.album}</TableCell>
+                    <TableCell sx={{ textAlign: "center", color: 'common.white' }}>{row.album}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

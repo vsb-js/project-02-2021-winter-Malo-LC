@@ -5,19 +5,10 @@ import { apiUrl } from "../config";
 
 export function AddArtist() {
     const [ArtistNames, setArtist] = useState(null);
-    
-    
-
-  
-    // There are more ways how we can handle forms with React
-    // One of them is to handle it with single state and onChange
-    // We want to have only 1 state for the form data! Multiple states can lead to problems
     const [formState, setFormState] = useState({
         name: "",
         followers: "",
     });
-
-
 
     useEffect(() => {
 
@@ -29,89 +20,62 @@ export function AddArtist() {
                 response = response.artists;
                 console.log(response);
                 setArtist(response)
-
-
             });
         } catch (error) {
             console.log(error)
         }
     }, []);
 
-
-
-    // we want to  have some kind of action result when we hit the API
     const [actionResult, setActionResult] = useState(null);
 
     function onNameChange(e) {
-        // To get the value of the field, it's the same as before with any input
-        const inputValue = e.target.value;
-
-        // Using the current state object might lead to issues because setState is async action!
-        // !! THIS IS WRONG !!
-        // const newState = { ...formState, ...{ firstName: inputValue } };
-        // setFormState(newState);
-
-        // setState can accept callback (a function) which gives you the previous state variable in the correct format
         setFormState((prevState) => {
-            return { ...prevState, ...{ name: inputValue } };
+            return { ...prevState, ...{ name: e.target.value } };
         });
     }
 
     function onFollowersChange(e) {
         setFormState((prevState) => {
-            return { ...prevState, ...{ followers: e.target.value*1 } };
+            return { ...prevState, ...{ followers: e.target.value * 1 } };
         });
     }
-    
 
     function handleFormSubmit() {
         console.log(formState);
 
-
-
-
-        // We could include some form validation
-        if(formState.name!=="" && Number.isInteger(formState.followers)){
+        if (formState.name !== "" && Number.isInteger(formState.followers)) {  //validation
             axios
-            .post(`${apiUrl}/artists/create`, {
-                name: formState.name,
-                followers: formState.followers
-            })
-            .then((response) => {
-                console.log(response.data);
-
-                const dataFromServer = response.data;
-                // This is something we have specified which is returned
-                if (dataFromServer.success === "OK") {
-                    // we want to inform the car that it was success
-                    setActionResult("Music successfully created");
-                }
-            })
-            .catch((reason) => {
-                console.error(reason);
-                setActionResult("There was an error creating the Artist");
-            })
-            .finally(
-                // Finally is action which will happen regardless if it goes to "then" or "catch"
-
-                // Let's clear the form
-                setFormState({
-                    name: "",
-                    followers: "",
-                }),
-            );
+                .post(`${apiUrl}/artists/create`, {
+                    name: formState.name,
+                    followers: formState.followers
+                })
+                .then((response) => {
+                    console.log(response.data);
+                    const dataFromServer = response.data;
+                    if (dataFromServer.success === "OK") {
+                        setActionResult("Music successfully created");
+                    }
+                })
+                .catch((reason) => {
+                    console.error(reason);
+                    setActionResult("There was an error creating the Artist");
+                })
+                .finally(
+                    setFormState({
+                        name: "",
+                        followers: "",
+                    }),
+                );
         }
-        else{
+        else {
             setActionResult("There was an error creating the Artist");
         }
-        
     }
 
     if (!ArtistNames) {
         return <div>Loading...</div>;
     }
 
-    // Btw we should definitely better design our form with CSS, add margins and other things
     return (
         <div >
             <h1 className="centered">Add an Artist into the database</h1>
