@@ -9,3 +9,4 @@ I only developped this site with google chrome, i have no idea if it works well 
 I also suggest to not resize the site, and use it in basic way
 Also, i don't know how to style forms, i know they are ugly
 
+#FINISHED
