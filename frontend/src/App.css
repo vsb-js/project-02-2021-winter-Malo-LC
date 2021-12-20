@@ -1,0 +1,134 @@
+
+h1{
+  margin: 0;
+  margin-bottom: 30px;
+  color: #e4dfb4;
+   font-family: 'Trocchi', serif;
+    font-size: 70px;
+     font-weight: normal;
+      line-height: 48px;
+       
+}
+
+h2 { color: #e4dfb4; font-family: 'Source Sans Pro', sans-serif; font-size: 28px; font-weight: 400; line-height: 32px; margin: 0 0 24px; }
+
+h3 { color: #000000;
+   font-family: 'Trocchi', serif;
+   font-size: 28px; 
+   font-weight: 800; 
+   line-height: 32px; 
+   margin: 0 0 24px;
+   }
+
+
+body{
+  font-family: 'Programme', Arial, sans-serif;
+  background-color: rgb(44, 44, 44);
+}
+
+#h1Home{
+text-align: center;
+}
+
+#pChoose{
+  font-family: 'Trocchi', serif;
+  text-align: center;
+  color: #e4dfb4;
+  font-size: 20px;
+}
+
+#flex{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#selectSyle{
+  color: #e4dfb4 ;
+  background-color: rgb(44, 44, 44);
+
+}
+
+.cards{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  
+}
+
+.content{
+  overflow: scroll;
+  height: 80%;
+}
+
+
+.card {
+  box-shadow: 0 6px 12px 0 rgba(228, 223, 180, 0.158);
+  transition: 0.3s;
+  width: 20%;
+  height: 200px;
+  padding: 20px;
+  margin: 30px 90px;
+  background-color: rgb(228, 223, 180);
+  border-radius: 15px;
+}
+
+.card:hover {
+  box-shadow: 0 12px 24px 0 rgba(228, 223, 180, 0.267);
+}
+
+
+
+*::-webkit-scrollbar {
+  width: 8px;               
+
+}
+
+*::-webkit-scrollbar-track {
+  background: none;        
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(228, 223, 180);    
+  border-radius: 20px;       
+  border:solid black 1px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(228, 223, 180) none;
+}
+
+.centered{
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin: 50px 0;
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.Confirmation	{
+  color: white;
+  
+}
+
+.DivHome{
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.pHomepage{
+  color: #e4dfb4;
+}
+
